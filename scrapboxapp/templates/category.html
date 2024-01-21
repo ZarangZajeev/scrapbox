@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block body_block%}
+    <div class="container">
+        <form action="" method="post" class="form-control mt-5">
+            {%csrf_token%}
+            <div>
+                <label for="">Name :</label>
+                <input type="text" name="name" id="">
+            </div>
+            <div>
+                <button class="btn" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+{%endblock%}

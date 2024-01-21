@@ -1,0 +1,103 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block body_block%}
+<section style="background-color: #eee;">
+    <div class="container text-danger py-5">
+      <div class="row mt-4">
+        <h1>
+            Profile
+        </h1>
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+                {%if data.profile_pic%}
+                    <img src="{{data.profile_pic.url}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px;">
+                {%else%}
+                    <img src="{%static 'box/images/profile.png'%}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                {%endif%}
+              <h5 class="my-3">{{data}}</h5>
+              <p class="text-muted mb-1">{{data.first_name}} {{data.last_name}}</p>
+              <!-- <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> -->
+              <div class="d-flex justify-content-center mb-2">
+                <a href="{%url 'profile-update' request.user.profile.id%}" type="button" class="btn btn-danger">Edit</a>
+                <button type="button" class="btn btn-outline-danger ms-1">Message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{data.first_name}} {{data.last_name}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user.email}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Phone</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{data.phone}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Address</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{data.address}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2 class="text-danger">My Ads</h2>
+      <div class="row mt-3 d-flex justify-content-center bg-white rounded-3 border">
+        <!-- card start -->
+      {%for product in data.user.user_scrap.all%}
+        <div class="col-md-4 col-lg-3 col-6">
+          <div id="product-1" class="single-product border rounded-3 mt-3" style="height: 33em; background-color: #eee;">
+                <div class="part-1">
+                    <a href="{%url 'scrap-detail' product.id%}">
+                      <img class="w-100 rounded-top-3" src="{{product.scrap_image.url}}" alt="">
+                    </a>
+                    <ul>
+                        <li><a class="pop-btn" style="text-decoration: none; background-color: transparent; border: none; padding: 0;" href="{%url 'scrap-update' product.id%}"><i class="fas fa-edit"></i></a></li>
+                        <li><a class="pop-btn" style="text-decoration: none; background-color: transparent; border: none; padding: 0;" href="{%url 'scrap-delete' product.id%}"><i class="fas fa-trash"></i></a></li>
+                        <li><a class="pop-btn" style="text-decoration: none; background-color: transparent; border: none; padding: 0;" href="{%url 'bid-request' product.id%}"><i class="fas fa-bell"></i></a></li>
+                    </ul>
+                </div>
+                <div class="part-2 p-3 d-flex flex-column">
+                    <h3 class="product-title">{{product.name}}</h3>
+                    <h4>{{product.description}}</h4>
+                    <h4 class="product-old-price">Actual price</h4>
+                    <h4 class="fw-bold ">₹{{product.price}}</h4>
+                </div>
+          </div>
+        </div>
+      {%endfor%}
+      </div>
+      </div>
+  </section>
+{%endblock%}

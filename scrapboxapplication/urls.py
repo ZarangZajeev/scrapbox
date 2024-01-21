@@ -16,7 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from scrapboxapp import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path("scrapbox/register",views.SignUpView.as_view(),name="signup"),
+    path("",views.SigninView.as_view(),name="signin"),
+    path("scrapbox/signout",views.SignoutView.as_view(),name="signout"),
+    path("scrapbox/index",views.IndexView.as_view(),name="index"),
+    path("scrapbox/profile-edit/<int:pk>/change",views.ProfileUpdateView.as_view(),name="profile-update"),
+    path("scrapbox/<int:pk>",views.ProfileDetailView.as_view(),name="profile"),
+    path("scrapbox/scrap/add",views.ScrapAddView.as_view(),name="scrap-add"),
+    path("scrapbox/scrap/category",views.CategoryAddView.as_view(),name="category"),
+    path("scrapbox/scrap/<int:pk>",views.ScrapDetailView.as_view(),name="scrap-detail"),
+    path("scrapbox/<int:pk>/change",views.ScrapUpdateView.as_view(),name="scrap-update"),
+    path("scrapbox/<int:pk>/remove",views.ScrapDelateView.as_view(),name="scrap-delete"),
+    path("scrapbox/<int:pk>/wishlist",views.WishlistAddView.as_view(),name='wishlist'),
+    path("scrapbox/wishlist",views.WishlistView.as_view(),name="wishlistview"),
+    path("scrapbox/all-bids",views.BidRequestView.as_view(),name="all-bids"),
+    path("Scrapbox/<int:pk>/bidrequest",views.AllBidsView.as_view(),name="bid-request"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

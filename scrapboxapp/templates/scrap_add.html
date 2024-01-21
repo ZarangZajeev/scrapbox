@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block body_block%}
+<link rel="stylesheet" href="{%static 'box/css/style.css'%}">
+<div class="vh-100 d-flex justify-content-center scrap-add">
+    <form action="" method="post" enctype="multipart/form-data" class="form-control w-50 mb-4">
+        <h3 class="p-3">Scrap Add</h3>
+        {%csrf_token%}
+        {{form.as_p}}
+        <div class="text-cente d-flex justify-content-center">
+            <button class="btn mb-3" type="submit">Submit</button>
+        </div>
+        <!-- <div class="ps-3 pt-4">
+            <h3>Add you item</h3>
+        </div>
+        <div class="row p-4 pt-1">
+            <div class="mt-4 col-md-6">
+                <label for="" class="">Item name :</label>
+                <input class="form-control" type="text" name="name" id="" placeholder="Eg: OnePlus 7T">
+            </div>
+            <div class="mt-4 col-md-6">
+                <label for="" class="">Category :</label>
+                <input class="form-control" type="submit" name="category" id="" placeholder="Eg: Electronics">
+                <select name="category" id=""></select>
+            </div>
+            <div class="mt-3">
+                <label for="">Upload Images :</label>
+                <input class="form-control" type="file" accept="image/*" name="scrap_image" id="">
+            </div>
+            <div class="mt-3">
+                <label for="">Description :</label>
+                <textarea class="form-control" name="description" id="" cols="30" rows="5" placeholder="Eg: Less used, No damages etc"></textarea>
+            </div>
+            <div>
+                <label class="mt-3" for="">Location :</label>
+                <input class="form-control" type="text" name="location" id="" placeholder="Eg: Kakkanadu, Kochi, 682030 Kerala">
+            </div>
+            <div class="col-md-6 mt-3">
+                <label for="">Condition :</label>
+                <input class="form-control" type="text" name="condition" id="" placeholder="Eg: Proper Working">
+            </div>
+            <div class="col-md-6 mt-3">
+                <label for="">Status :</label>
+                <input class="form-control" type="text" name="status" id="" placeholder="Eg: Available">
+            </div>
+            <div class="mt-3 col-md-6">
+                <label for="">Price :</label>
+                <input class="form-control" type="number" name="price" id="" placeholder="Eg:₹ 7,500">
+            </div>
+            <div class="col-md-6 mt-5">
+                <button type="submit" class="btn btn-secondary form-control">Upload</button>
+            </div>
+        </div> -->
+    </form>
+</div>
+{%endblock%}

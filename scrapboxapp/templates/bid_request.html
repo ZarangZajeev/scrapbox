@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>bid request</title>
+</head>
+<body class="">
+    <div class="container">
+        <h5 class="mt-3"><a class="btn rounded-pill bg-secondary text-white text-decoration-none text-dark" href="{%url 'index'%}">Comtinue Shopping</a></h5>
+        <div class="">
+            <div class="row mt-5 gap-0 d-flex justify-content-center">
+                <div class="d-flex flex-column col-md-6">
+                    <div class="text-center">
+                        <span class="h4">Reqested Bids</span>
+                    </div>
+                    {%for d in data%}
+                    <div class="product d-flex border-0 rounded-3 p-3 mt-3 bg-warning text-white">
+                        <div>
+                            <span><i class="me-4 fa-solid fa-circle" style="color: #976400;"></i>You requested to add new bid for <span class="fw-bold">{{d.scrap}}</span> with <span class="fw-bold">₹{{d.amount}}</span></span>
+                        </div>
+                        <div class="ms-auto ">
+                            <!-- <button class="btn rounded-pill btn-success text-decoration-none">Accept <i class="fa-solid fa-circle-check" style="color: #15c438;"></i></button> -->
+                            <button class="btn text-decoration-none"><i class="fs-4 fa-solid fa-xmark" style="color: #ff0000;"></i></button>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+
+                <div class="d-flex flex-column col-md-6">
+                    <div class="text-center">
+                        <span class="h4">Accepted Bids</span>
+                    </div>
+                    <div class="product d-flex border-0 rounded-3 p-3 mt-3 py-4 bg-success text-white">
+                        <div>
+                            <span><i class="me-4 fa-solid fa-circle" style="color: #00d53c;"></i>Dealer accepted your request of <span class="fw-bold">Item name</span> with <span class="fw-bold">Amount</span> is accepted</span>
+                        </div>
+                        <div class="ms-auto me-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

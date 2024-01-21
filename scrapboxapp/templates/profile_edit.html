@@ -1,0 +1,73 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block body_block%}
+<link rel="stylesheet" href="{%static 'box/css/style.css'%}">
+<div class="container">
+    <div class="container bootstrap snippets bootdey">
+        <h1 class="text-primary mt-5 pt-4 text-center">Edit Profile</h1>
+          <hr>
+                <div class="row mt-5">
+          <!-- left column -->
+
+                    <div class="col-md-3 col-lg-4">
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data" role="form">
+                            {%csrf_token%}
+        
+                        <div class="text-center">
+                            <div class="mb-5">
+                                <h1 class="fw-bolder">{{request.user}}</h1>
+                            </div>
+                            <label for="fileToUpload">
+                                <div class="p-3">
+                                    {%if form.profile_pic.value%}
+                                        <img src="{{form.profile_pic.value.url}}" class="avatar img-circle img-thumbnail" alt="avatar" width="200">
+                                    {%else%}
+                                        <img src="{%static 'box/images/profile.png'%}" alt="" width="200">
+                                    {%endif%}
+                                    <input type="file" hidden name="profile_pic" id="fileToUpload" accept="image/*" class="form-control mt-4">
+                                    <span class="glyphicon glyphicon-camera"></span>
+                                </div>
+                            </label>
+                            <h6>Upload a different photo...</h6>
+                            
+                        </div>
+                    </div>
+                
+                    <!-- edit form column -->
+                    <div class="col-md-9 col-lg-8 personal-info">
+                    <h3>Personal info</h3>
+            
+                    <div class="form-group mb-4">
+                        <label class="col-lg-3 control-label">First name:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" name="first_name" value="{{form.first_name.value}}" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="col-lg-3 control-label">Last name:</label>
+                        <div class="col-lg-8">
+                        <input class="form-control" name="last_name" value="{{form.last_name.value}}" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="col-lg-3 control-label">Address:</label>
+                        <div class="col-lg-8">
+                        <input class="form-control" name="address" value="{{form.address.value}}" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Phone:</label>
+                        <div class="col-lg-8">
+                        <input class="form-control" name="phone" value="{{form.phone.value}}" type="text">
+                        </div>
+                    </div>
+                    <div class="mt-3 ms-0 me-auto">
+                    <button class="btn form-control w-25 btn-dark" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+{%endblock%}
