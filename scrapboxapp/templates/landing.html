@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrapbox</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static 'box/css/style.css'%}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div style="margin-top: 25em;">
+                    <span class="fw-bold" style="font-size: 10em;"><span class="" style="color: brown;">Scrap</span><span class="" style="color: rgb(57, 38, 8);">Box</span></span>
+                    <div>
+                        <a href="{%url 'signup'%}" class="btn prodct-but form-control">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-end mt-5">
+                    <a href="{%url 'signup'%}" class="btn prodct-but">Register</a>
+                    <a href="{%url 'signin'%}" class="btn prodct-but">Login</a>
+                </div>
+                <div style="margin-top: 25em;">
+                    <span class="text-danger">Whether you're a seasoned shopper or a first-time visitor, 
+                        our intuitive interface ensures a hassle-free experience. Join our community and embark on 
+                        a shopping adventure where convenience meets style. Your account awaits – dive into the world of
+                         effortless online shopping with just a click!
+                    </span>
+                </div>
+            </div>
+            <footer class="d-flex justify-content-center mt-5 opacity-50">
+                <div class="text-center mt-auto">
+                    <Span >&#169 2023 scrapbox.com |  SARANG SAJEEV</Span>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

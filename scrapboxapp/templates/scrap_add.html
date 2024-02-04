@@ -3,12 +3,14 @@
 {%block body_block%}
 <link rel="stylesheet" href="{%static 'box/css/style.css'%}">
 <div class="vh-100 d-flex justify-content-center scrap-add">
-    <form action="" method="post" enctype="multipart/form-data" class="form-control w-50 mb-4">
-        <h3 class="p-3">Scrap Add</h3>
+    <form action="" method="post" enctype="multipart/form-data" class="d-flex flex-column justify-content-center form-control w-50 mb-4 h-75">
+        <div class="text-center">
+            <h1 class="p-3">Scrap Add</h1>
+        </div>
         {%csrf_token%}
         {{form.as_p}}
-        <div class="text-cente d-flex justify-content-center">
-            <button class="btn mb-3" type="submit">Submit</button>
+        <div class="text-cente d-flex justify-content-center mt-5">
+            <button class="btn btn-outline-danger form-control w-25 mb-3" type="submit">Submit</button>
         </div>
         <!-- <div class="ps-3 pt-4">
             <h3>Add you item</h3>

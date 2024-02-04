@@ -10,10 +10,18 @@
     <link rel="stylesheet" href="{%static 'box/css/style.css'%}">
 </head>
 <body class="vh-100 bg-danger">
-
     <section class="h-100 gradient-form" style="background-color: #eee;">
         <div class="container h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
+            {%if messages%}
+              {%for m in messages%}
+                <div class="w-25 alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong> login</strong> {{m}}.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {%endfor%}
+            {%endif%}
+      
             <div class="col-xl-10">
               <div class="card rounded-3 text-black">
                 <div class="row g-0">
@@ -58,15 +66,23 @@
                   </div>
                   <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                     <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                      <h4 class="mb-4">We are more than just a company</h4>
-                      <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      <div class="text-cente">
+                        <h4 class="mb-4 text-cente">The Community We Build For You</h4>
+                      </div>
+                      <p class="small mb-0">Whether you're a seasoned shopper or a first-time visitor, 
+                        our intuitive interface ensures a hassle-free experience. Join our community and embark on 
+                        a shopping adventure where convenience meets style. Your account awaits – dive into the world of
+                         effortless online shopping with just a click!</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <footer class="d-flex justify-content-center">
+              <div class="text-center mt-auto mb-2 ">
+                  <Span >&#169 2023 scrapbox.com |  SARANG SAJEEV</Span>
+              </div>
+            </footer>
           </div>
         </div>
       </section>
@@ -119,5 +135,6 @@
             </div>
         </div>
     </div> -->
+
 </body>
 </html>

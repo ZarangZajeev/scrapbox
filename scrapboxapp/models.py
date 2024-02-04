@@ -49,6 +49,12 @@ class Wishlist(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="user_wish")
     created_date=models.DateTimeField(auto_now_add=True)
 
+def create_wishlist(sender,created,instance,**kwargs):
+    if created:
+        Wishlist.objects.create(user=instance)
+        print("wishlist created")
+
+
 class Bids(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="user_bids")
     scrap=models.ForeignKey(Scrap,on_delete=models.CASCADE)
@@ -72,5 +78,5 @@ class Review(models.Model):
     def __str__(self):
         return self.comment
 
-
+post_save.connect(create_wishlist,sender=User)
 post_save.connect(create_profile,sender=User)

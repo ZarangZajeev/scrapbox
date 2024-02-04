@@ -25,37 +25,36 @@
       <div class="text-center">
         <div class="text-center">
           <span class="">
-            <span class="text-dark">Hello</span>
-            <span class="text-dark ms-1 fw-bold">{{request.user}}</span>
+            <span class="text-dark h5">Hello</span>
+            <span class="text-dark h4 ms-1 fw-bold">{{request.user}}😁</span>
         </span>
         </div>
       </div>
       <form class="d-flex text-center ms-auto me-3" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="btn btn-outline-dark" type="submit"><span class="h4">🔍</span></button>
       </form>
 
-      <a href="{%url 'scrap-add'%}" class="btn me-0 btn-dark me-3">Sell Item</a>
+      <a href="{%url 'scrap-add'%}" class="btn prodct-but me-3">🛒 Sell Item</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Enjoy your shopping<hr></h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 single-product">
             <ul class="nav-item text-center part-1">
               {%if request.user.profile%}
-                <a class="nav-link" href="{%url 'index'%}">Home</a>
-                <a class="nav-link" href="{%url 'wishlistview'%}">Wishlist</a>
-                <a class="nav-link" href="{%url 'profile' request.user.profile.id%}">Profile</a>
-                <a class="nav-link" href="{%url 'profile-update' request.user.profile.id%}">Edit Profile</a>
-                <a class="nav-link" href="{%url 'all-bids'%}">All Bids</a>
-                <a class="nav-link" href="{%url 'category'%}">Category</a>
-                <a class="text-decoration-none text-danger" href="{%url 'signout'%}">Logout</a>
+                <a class="nav-link mb-1 prodct-but" href="{%url 'index'%}">Home 🏠</a>
+                <a class="nav-link mb-1 prodct-but" href="{%url 'wishlistview'%}">Wishlist 💕</a>
+                <a class="nav-link mb-1 prodct-but" href="{%url 'profile' request.user.profile.id%}">Profile 👨</a>
+                <a class="nav-link mb-1 prodct-but" href="{%url 'profile-update' request.user.profile.id%}">Edit Profile 📝</a>
+                <a class="nav-link mb-1 prodct-but" href="{%url 'all-bids'%}">All Bids 😶‍🌫️</a>
+                <a class="nav-link mb-1 prodct-but" href="{%url 'signout'%}">Logout 👋</a>
               {%endif%}
             </ul>
           </ul>
@@ -64,6 +63,7 @@
     </div>
   </nav>
   <!-- Navbar -->
+
   
       {%block body_block%}
 

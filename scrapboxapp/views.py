@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.cache import never_cache
 from django.utils.decorators import method_decorator
+from django.contrib import messages
 
 from scrapboxapp.decorators import login_required
 from scrapboxapp.forms import RegistrationForm,LoginForm,UserProfileForm,ScrapForm,CategoryForm,BidsForm
@@ -12,7 +13,9 @@ from scrapboxapp.models import UserProfile,Scrap,Wishlist,Bids
 
 dec=[login_required,never_cache]
 
-
+class LandingView(TemplateView):
+    template_name="landing.html"
+    
 class SignUpView(CreateView):
     template_name="register.html"
     form_class=RegistrationForm
@@ -35,6 +38,7 @@ class SigninView(FormView):
                 print("Login successfully")
                 return redirect("index")
         print("Failed to login")
+        messages.error(request,"Password or username incorrect")
         return render(request,"login.html",{"form":form})
     
 @method_decorator(dec,name="dispatch")
@@ -50,14 +54,12 @@ class IndexView(ListView):
         wish=Wishlist.objects.get(user=request.user)
         return render(request,"index.html",{"data":qs,"wishlist":wish})
 
-
 @method_decorator(dec,name="dispatch")
 class CategoryAddView(CreateView):
     template_name='category.html'
     form_class=CategoryForm
     def get_success_url(self):
         return reverse("index")
-
 
 @method_decorator(dec,name="dispatch")
 class ScrapAddView(View):
@@ -69,6 +71,7 @@ class ScrapAddView(View):
         if form.is_valid():
             form.instance.user=request.user
             form.save()
+            messages.success(request,"Product added successfully")
             return redirect("index")
         else:
             return render(request,"scrap_add.html",{'form':form})
@@ -78,6 +81,7 @@ class ScrapDelateView(View):
     def get(self,request,*args,**kwargs):
         id=kwargs.get("pk")
         Scrap.objects.get(id=id).delete()
+        messages.error(request,"Product deleted successfully")
         return redirect("index")
 
 @method_decorator(dec,name="dispatch")
@@ -96,11 +100,6 @@ class ProfileDetailView(DetailView):
     context_object_name="data"
 
 @method_decorator(dec,name="dispatch")
-# class ScrapDetailView(DetailView,CreateView):
-#     template_name="scrap_detail.html"
-#     form_class=BidsForm
-#     model=Scrap
-#     context_object_name="data"
 class ScrapDetailView(View):
     def get(self,request,*args,**kwargs):
         id=kwargs.get("pk")
@@ -115,9 +114,9 @@ class ScrapDetailView(View):
             form.instance.user_id= request.user.id
             form.instance.scrap_id=id
             form.save()
+            messages.success(request,"Bid added")
             return redirect("index")
 
-    
 @method_decorator(dec,name="dispatch")
 class ScrapUpdateView(UpdateView):
     template_name="scrap_update.html"
@@ -138,9 +137,11 @@ class WishlistAddView(View):
         wishlist, created = Wishlist.objects.get_or_create(user=request.user)
         if action == "add":
             wishlist.scrap.add(scrap_obj)
+            messages.success(request,"Product added to wishlist")
         elif action == "remove":
             wishlist.scrap.remove(scrap_obj)
             print("removed")
+            messages.success(request,"Product Removed from wishlist")
         elif action == "remove_from_wish":
             wishlist.scrap.remove(scrap_obj)
             return redirect("wishlistview")
@@ -157,10 +158,15 @@ class WishlistView(View):
 class BidRequestView(View):
     def get(self,request,*args,**kwargs):
         id=kwargs.get("pk")
-        # qs=Bids.objects.all()
-        # qs=Bids.objects.get(user=request.user)
         qs=Bids.objects.all().filter(user=request.user)
         return render(request,"bid_request.html",{"data":qs})
+    def post(self,request,*args,**kwargs):
+        id=kwargs.get("pk")
+        qs=Bids.objects.get(id=id)
+        action=request.POST.get("action")
+        if action=="remove":
+            Bids.scrap.remove(qs)
+        return redirect("all-bids")
     
 @method_decorator(dec,name="dispatch")
 class AllBidsView(View):
@@ -176,5 +182,4 @@ class AllBidsView(View):
             Bids.objects.filter(id=id).update(status="Accept")
         elif action=="reject":
             Bids.objects.filter(id=id).update(status="Reject")
-            Bids.objects.filter(scrap_id=id).delete()
         return redirect("index")

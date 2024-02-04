@@ -23,7 +23,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("scrapbox/register",views.SignUpView.as_view(),name="signup"),
-    path("",views.SigninView.as_view(),name="signin"),
+    path("",views.LandingView.as_view(),name="landing"),
+    path("signin",views.SigninView.as_view(),name="signin"),
     path("scrapbox/signout",views.SignoutView.as_view(),name="signout"),
     path("scrapbox/index",views.IndexView.as_view(),name="index"),
     path("scrapbox/profile-edit/<int:pk>/change",views.ProfileUpdateView.as_view(),name="profile-update"),
@@ -36,5 +37,5 @@ urlpatterns = [
     path("scrapbox/<int:pk>/wishlist",views.WishlistAddView.as_view(),name='wishlist'),
     path("scrapbox/wishlist",views.WishlistView.as_view(),name="wishlistview"),
     path("scrapbox/all-bids",views.BidRequestView.as_view(),name="all-bids"),
-    path("Scrapbox/<int:pk>/bidrequest",views.AllBidsView.as_view(),name="bid-request"),
+    path("scrapbox/<int:pk>/bidrequest",views.AllBidsView.as_view(),name="bid-request"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

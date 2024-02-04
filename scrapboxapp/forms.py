@@ -26,7 +26,7 @@ class ScrapForm(forms.ModelForm):
             "name":forms.TextInput(attrs={"class":"form-control","placeholder":"Product name: Eg: Samsung Gallaxy"}),
             "category":forms.Select(attrs={"class":"form-control"}),
             "price":forms.NumberInput(attrs={"class":"form-control","placeholder":"Eg:₹ 24999"}),
-            "dscription":forms.TextInput(attrs={"class":"form-control","placeholder":"Eg: 8GB Ram, 124GB Rom, AMOLED display"}),
+            "description":forms.TextInput(attrs={"class":"form-control","placeholder":"Eg: 8GB Ram, 124GB Rom, AMOLED display"}),
             "location":forms.TextInput(attrs={"class":"form-control","placeholder":"Eg: Kakkanadu, Kochi, Kerala, India"}),
             "scrap_image":forms.FileInput(attrs={"class":"form-control"}),
             "condition":forms.TextInput(attrs={"class":"form-control","placeholder":"Eg: Working condition"}),
