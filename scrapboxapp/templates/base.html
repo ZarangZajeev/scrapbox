@@ -30,10 +30,10 @@
         </span>
         </div>
       </div>
-      <!-- <form class="d-flex text-center ms-auto me-3" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex text-center ms-auto me-3" action="{%url 'pro-search' %}" role="search" method="GET">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="product">
         <button class="btn btn-outline-dark" type="submit"><span class="h4">🔍</span></button>
-      </form> -->
+      </form>
       <div class="ms-auto me-3">
         <a href="{%url 'scrap-add'%}" class="btn prodct-but">🛒 Sell Item</a>
       </div>

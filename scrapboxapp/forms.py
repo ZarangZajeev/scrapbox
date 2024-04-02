@@ -42,3 +42,7 @@ class BidsForm(forms.ModelForm):
     class Meta:
         model= Bids
         fields=["amount"]
+    
+class ProductSearchForm(forms.Form):
+    product=forms.CharField(max_length=30,required=False)
+    description=forms.CharField(max_length=30,required=False)

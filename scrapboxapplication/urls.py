@@ -19,6 +19,7 @@ from django.urls import path
 from scrapboxapp import views
 from django.conf import settings
 from django.conf.urls.static import static
+from scrapboxapp.views import product_search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,4 +39,5 @@ urlpatterns = [
     path("scrapbox/wishlist",views.WishlistView.as_view(),name="wishlistview"),
     path("scrapbox/all-bids",views.BidRequestView.as_view(),name="all-bids"),
     path("scrapbox/<int:pk>/bidrequest",views.AllBidsView.as_view(),name="bid-request"),
+    path('search',product_search,name="pro-search"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

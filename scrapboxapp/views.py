@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 
 from scrapboxapp.decorators import login_required
-from scrapboxapp.forms import RegistrationForm,LoginForm,UserProfileForm,ScrapForm,CategoryForm,BidsForm
+from scrapboxapp.forms import RegistrationForm,LoginForm,UserProfileForm,ScrapForm,CategoryForm,BidsForm,ProductSearchForm
 from scrapboxapp.models import UserProfile,Scrap,Wishlist,Bids
 # Create your views here.
 
@@ -183,3 +183,32 @@ class AllBidsView(View):
         elif action=="reject":
             Bids.objects.filter(id=id).update(status="Reject")
         return redirect("index")
+    
+@method_decorator(dec,name="dispatch")
+def product_search(request):
+    if request.method == "GET":
+        form = ProductSearchForm(request.GET)
+        if form.is_valid():
+            product = form.cleaned_data.get('product')
+            desc=form.cleaned_data.get('description')
+            products=Scrap.objects.all()
+            print(product, desc)
+
+            if product:
+                products = Scrap.objects.filter(name__icontains=product)
+
+            if desc:
+                products = Scrap.objects.filter(description__icontains=desc)
+            print(products)
+
+            if products:
+                return render(request, "index.html", {"products": products})
+            else:
+                error_message = "No products available for this provided name"
+                return render(request, "index.html", {"form": form, "error_message": error_message})
+        else:
+            error_message = "Invalid search criteria"
+            return render(request, "index.html", {"form": form, "error_message": error_message})
+    else:
+        form = ProductSearchForm()
+        return render(request, "index.html", {"form": form})

@@ -82,6 +82,46 @@
         </div>
       </div>
     {%endfor%}
+
+    {% if products %}
+      {% for scrap in products %}
+      <div class="col-md-4 col-lg-3 col-6">
+        <div id="product-1" class="single-product border-0 rounded-3" style="height: 33em;">
+              <div class="part-1">
+                  <a href="{%url 'scrap-detail' scrap.id%}">
+                    <img class="w-100 rounded-top-3" src="{{scrap.scrap_image.url}}" alt="">
+                  </a>
+                  <form action="{%url 'wishlist' scrap.id%}" method="post">
+                    {%csrf_token%}
+                    <ul>
+                      {%if scrap in wishlist.scrap.all%}
+                        <li><button class="pop-btn" style="text-decoration: none; background-color: transparent; border: none; padding: 0;" type="submit" name="action" value="remove"><i class="fas fa-heart" style="color: rgb(255, 0, 0);"></i></button></li>
+                      {%else%}
+                        <li><button class="pop-btn" style="text-decoration: none; background-color: transparent; border: none; padding: 0;" type="submit" name="action" value="add"><i class="fas fa-heart"></i></button></li>
+                      {%endif%}
+                      </ul>
+                  </form>
+              </div>
+              <div class="part-2 p-3 d-flex flex-column">
+                  <h3 class="product-title">{{scrap.name}}</h3>
+                  <h4>{{scrap.description}}</h4>
+                  <h4 class="product-old-price">Actual price</h4>
+                  <h4 class="fw-bold ">₹{{scrap.price}}</h4>
+              </div>
+        </div>
+      </div>
+      {% endfor %}
+    
+    {%else%}
+
+      <div class="text-center mb-3">
+        <div>
+          <img class="w-50" src="{%static 'box/images/not_available.png'%}" alt="">
+        </div>
+        <span class="h5 text-secondary">{{error_message}}</span>
+      </div>
+
+    {%endif%}
     <!-- card end -->
     </div>
 </div>
