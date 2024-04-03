@@ -54,7 +54,6 @@ def create_wishlist(sender,created,instance,**kwargs):
         Wishlist.objects.create(user=instance)
         print("wishlist created")
 
-
 class Bids(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="user_bids")
     scrap=models.ForeignKey(Scrap,on_delete=models.CASCADE)

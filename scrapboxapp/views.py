@@ -8,7 +8,7 @@ from django.contrib import messages
 
 from scrapboxapp.decorators import login_required
 from scrapboxapp.forms import RegistrationForm,LoginForm,UserProfileForm,ScrapForm,CategoryForm,BidsForm,ProductSearchForm
-from scrapboxapp.models import UserProfile,Scrap,Wishlist,Bids
+from scrapboxapp.models import UserProfile,Scrap,Wishlist,Bids,Category
 # Create your views here.
 
 dec=[login_required,never_cache]
@@ -63,19 +63,20 @@ class CategoryAddView(CreateView):
 
 @method_decorator(dec,name="dispatch")
 class ScrapAddView(View):
-    def get(self,request,*args,**kwargs):
-        form=ScrapForm
-        return render(request,"scrap_add.html",{'form':form})
-    def post(self,request,*args,**kwargs):
-        form=ScrapForm(request.POST,files=request.FILES)
+    def get(self, request, *args, **kwargs):
+        form = ScrapForm()  # Instantiate an empty ScrapForm
+        categories = Category.objects.all()  # Retrieve all categories
+        return render(request, "scrap_add.html", {'form': form, 'category': categories})
+    def post(self, request, *args, **kwargs):
+        form = ScrapForm(request.POST, files=request.FILES)
         if form.is_valid():
-            form.instance.user=request.user
+            form.instance.user = request.user
             form.save()
-            messages.success(request,"Product added successfully")
+            messages.success(request, "Product added successfully")
             return redirect("index")
         else:
-            return render(request,"scrap_add.html",{'form':form})
-
+            return render(request, "scrap_add.html", {'form': form})
+        
 @method_decorator(dec,name="dispatch")
 class ScrapDelateView(View):
     def get(self,request,*args,**kwargs):
