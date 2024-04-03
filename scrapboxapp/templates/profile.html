@@ -92,7 +92,7 @@
         {%else%}
         {%for product in data.user.user_scrap.all%}
           <div class="col-md-4 col-lg-3 col-6">
-            <div id="product-1" class="single-product border rounded-3 mt-3" style="height: 33em; background-color: #eee;">
+            <div id="product-1" class="single-product border rounded-3 mt-3" style="height: 35em; background-color: #eee;">
                   <div class="part-1">
                       <a href="{%url 'scrap-detail' product.id%}">
                         <img class="w-100 rounded-top-3" src="{{product.scrap_image.url}}" alt="">

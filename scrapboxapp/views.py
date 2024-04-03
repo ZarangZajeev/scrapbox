@@ -184,7 +184,6 @@ class AllBidsView(View):
             Bids.objects.filter(id=id).update(status="Reject")
         return redirect("index")
     
-@method_decorator(dec,name="dispatch")
 def product_search(request):
     if request.method == "GET":
         form = ProductSearchForm(request.GET)
