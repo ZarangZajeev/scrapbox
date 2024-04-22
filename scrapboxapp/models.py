@@ -39,6 +39,7 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
 def create_profile(sender,created,instance,**kwargs):
     if created:
         UserProfile.objects.create(user=instance)
