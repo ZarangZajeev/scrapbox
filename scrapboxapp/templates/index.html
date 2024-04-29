@@ -114,12 +114,14 @@
     
     {%else%}
 
-      <div class="text-center mb-3">
-        <div>
-          <img class="w-50" src="{%static 'box/images/not_available.png'%}" alt="">
+      {% if error_message %}
+        <div class="text-center mb-3">
+          <div>
+            <img class="w-50" src="{% static 'box/images/not_available.png' %}" alt="">
+          </div>
+          <span class="h5 text-secondary">{{ error_message }}</span>
         </div>
-        <span class="h5 text-secondary">{{error_message}}</span>
-      </div>
+      {% endif %}
 
     {%endif%}
     <!-- card end -->
